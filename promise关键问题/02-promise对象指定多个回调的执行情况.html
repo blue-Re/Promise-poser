@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** 
+     * 当一个promise对象同时指定多个状态时，
+     * 当 promise的状态改变成对应的状态后 ，对应的回调 都会执行
+     */
+
+    let p = new Promise((resolve,reject)=>{
+      // resolve('ok')
+      reject('no')
+    })
+
+    p.then((value) => {
+      console.log(value)
+    }).catch((reason) => {
+      console.log(reason)
+    });
+
+    p.then((value) => {
+      console.log(value)
+    }).catch((reason) => {
+      alert(reason)
+    });
+  </script>
+</body>
+</html>

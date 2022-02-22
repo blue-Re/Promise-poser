@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    promise.all的方法
+      当所有的promise都为成功的时候，all方法返回的也是所有promise返回成功的结果
+      一旦有一个为失败，那all方法返回的也是失败
+   -->
+  <script>
+    let p1 = new Promise((resolve, reject) => {
+      const data = { name: '啦啦啦', age: 12}
+      resolve(data)
+    })
+    let p2 = new Promise((resolve, reject) => {
+      const data = { name: '啦啦啦22', age: 12}
+      // resolve(data)
+      reject('Error')
+    })
+    let p3 = new Promise((resolve, reject) => {
+      const data = { name: '啦啦啦33', age: 12}
+      resolve(data)
+    })
+    let result = Promise.all([p1, p2, p3])
+    console.log(result);
+  </script>
+</body>
+
+</html>

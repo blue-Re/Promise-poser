@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- 需求：点击按钮，发送ajax请求 -->
+  <h1>promise发送ajax请求</h1>
+  <button id="btn">发送ajax请求</button>
+
+  <script>
+    const btn = document.querySelector('#btn')
+    btn.onclick = function () {
+      // 创建promise对象
+      let p = new Promise((resolve, reject) => {
+        // 1.创建ajax对象
+        let xhr = new XMLHttpRequest()
+        // 2.初始化
+        xhr.open('GET', 'http://127.0.0.1:8000/serve')
+        // 3.发送
+        xhr.send()
+        // 4.处理结果
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              // 请求成功
+              resolve(xhr.response)
+            }else{
+              // 请求失败
+              reject(xhr.status)
+            }
+          }
+        }
+      })
+      // 操作完成，执行then方法
+      p.then((value)=>{
+        console.log(value)
+      },(reason)=>{
+        console.warn(reason)
+      })
+    }
+  </script>
+</body>
+
+</html>

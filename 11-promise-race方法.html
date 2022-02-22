@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // promise race 方法
+    // 参数：包含多个promise对象的数组
+    // 返回：race参数中的promise对象，第一个完成promise的结果，就是在最终的返回结果
+    let p1 = new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve('OK')
+      },2000)
+    })
+    let p2 = Promise.resolve('成功')
+    let p3 = Promise.resolve('优秀')
+    let p4 = Promise.reject('我是失败')
+    
+    const result = Promise.race([p2,p4])
+    console.log(result)
+
+    const result2 = Promise.race([p1,p4])
+    console.log(result2)
+  </script>
+</body>
+</html>

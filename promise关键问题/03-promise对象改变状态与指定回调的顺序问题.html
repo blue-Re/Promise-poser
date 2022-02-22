@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      改变 promise 状态和指定回调函数谁先谁后
+        - 正常情况下是先指定回调，在改变状态； 但也可以先改变状态再指定回调
+
+        - 如何先改变状态再指定回调？
+          1.在执行器函数中直接调用 resolve/reject方法
+          2.在执行器函数中(延迟更长时间后),才调用then方法
+
+        - 什么时候才能拿到数据？ --> 回调函数什么时候执行
+          1. 如果先指定的回调（异步延迟），当状态发生改变时，回调函数就会调用，得到数据
+          2. 如果先改变的状态，当指定回调时，回调函数就会调用，得到数据
+    */
+
+    let p = new Promise((resolve,reject)=>{
+      resolve('我调用了该函数，先改变了状态,一指定回调，就会进行调用')
+    })
+
+    p.then(value=>{
+      console.log(value)
+    },(reason)=>{
+      console.log(reason)
+    })
+
+    let p2= new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve('我是异步任务，当我的状态改变时，回调函数才会调用')
+      },3000)
+    })
+
+    p2.then((result) => {
+      console.log(result)
+    }).catch((err) => {
+      console.log(err)
+    });
+  </script>
+</body>
+</html>

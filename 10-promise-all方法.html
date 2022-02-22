@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // promise all 方法
+    // 参数：包含多个promise对象的数组
+    //       all方法的返回结果是一个promise对象，只有当参数中的promise对象都成功，all方法返回的才是成功；
+    //                                          只要参数中有一个promise对象是失败，all方法返回的就是失败
+
+    let p1 = new Promise((resolve,reject)=>{
+      resolve('OK')
+    })
+    let p2 = Promise.resolve('成功')
+    let p3 = Promise.resolve('优秀')
+    let p4 = Promise.reject('我是失败')
+    const result = Promise.all([p1,p2,p3])
+    console.log(result)
+
+    const result2 = Promise.all([p1,p2,p3,p4])
+    console.log(result2)
+
+  </script>
+</body>
+</html>
